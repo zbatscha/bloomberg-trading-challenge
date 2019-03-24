@@ -1,0 +1,44 @@
+Simulation Completed on 3/24/2019 T13:19:31
+Simulation Settings: 
+	trials=1000
+	simulation_length_days=50
+	num_teams=61
+	opponent_strategy=random
+	annual_trading_days=252
+	max_implied_vol=100.0
+	min_implied_vol=10.0
+	risk_free_return=0.0248
+	num_portfolio_return_distributions=100
+	market_drift=0.06
+––––– If Team Ranking Determined by Total Earnings ––––
+Frequency of Princeton attending the finals (1st or 2nd place) of 1000 trials: 108
+Probability of Princeton being 1st or 2nd and proceeding to finals: 0.108
+Princeton's edge (how much more likely we are to win playing our strategy): 3.424947145877378
+––––– If Team Ranking Determined by Sharpe Ratio ––––
+Frequency of Princeton attending the finals (1st or 2nd place) of 1000 trials: 94
+Probability of Princeton being 1st or 2nd place: 0.094
+Princeton's edge (how much more likely we are to win playing our strategy): 2.9590766002098636
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Simulation Completed on 3/24/2019 T13:21:0
+Simulation Settings: 
+	trials=1000
+	simulation_length_days=50
+	num_teams=61
+	opponent_strategy=low
+	annual_trading_days=252
+	max_implied_vol=100.0
+	min_implied_vol=10.0
+	risk_free_return=0.0248
+	num_portfolio_return_distributions=100
+	market_drift=0.06
+––––– If Team Ranking Determined by Total Earnings ––––
+Frequency of Princeton attending the finals (1st or 2nd place) of 1000 trials: 643
+Probability of Princeton being 1st or 2nd and proceeding to finals: 0.643
+Princeton's edge (how much more likely we are to win playing our strategy): 28.43036109064112
+––––– If Team Ranking Determined by Sharpe Ratio ––––
+Frequency of Princeton attending the finals (1st or 2nd place) of 1000 trials: 382
+Probability of Princeton being 1st or 2nd place: 0.382
+Princeton's edge (how much more likely we are to win playing our strategy): 14.165636588380718
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
