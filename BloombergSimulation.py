@@ -1,7 +1,6 @@
 import numpy as np
 import click
 import math
-import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
