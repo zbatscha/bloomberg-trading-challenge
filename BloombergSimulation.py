@@ -29,7 +29,7 @@ np.random.seed(seed=97)
 @click.option("--annual-trading-days", nargs=1, required=False, type=click.INT, default=252, help="Annual number of days when the stock exchange is open. Default is 252 (Trading Days for 2019).")
 @click.option("--max-implied-vol", nargs=1, required=False, type=click.FLOAT, default=100.0, help="Maximum implied volatility for the year. Expects value in [0.0, 100.0]. Default is 100.0 (100%).")
 @click.option("--min-implied-vol", nargs=1, required=False, type=click.FLOAT, default=10.0, help="Minimum implied volatility for the year. Expects value in [0.0, 100.0]. Default is 10.0 (10%).")
-@click.option("--opponent-strategy", nargs=1, required=False, type=click.STRING, default="random", help="Return distribution variance of competitors. Choose one of these options: \"random\": between [minVol, maxVol], \"low\": minVol, \"high\": maxVol. Default is \"random\".")
+@click.option("--opponent-strategy", nargs=1, required=False, type=click.STRING, default="random", help="Return distribution variance of competitors. Choose one of these options: \"random\": between [minVol, maxVol], \"low\": daily minVol, \"high\": daily maxVol, \"mixed\": 1/3 high, 1/3 avg, 1/3 random, \"avg\": mean [minVol, maxVol]. Default is \"random\".")
 @click.option("--risk-free-return", nargs=1, required=False, type=click.FLOAT, default = 0.0248, help="Theoretical annual rate of return of an investment with zero risk. Expects value in [0.0, 1.0]. Default is 2.48% (0.0248).")
 @click.option("--num-portfolio-return-distributions", nargs=1, required=False, type=click.INT, default=100, help="Number of possible standard deviations (i.e. number of portfolio returns distributions to pick from on any given trading day). Default is 100.")
 @click.option("--market-drift", nargs=1, required=False, type=click.FLOAT, default=0.06, help="Average annual stock market growth, enforced penalty for holding cash. Expects value in [0.0, 1.0]. Default is 6% (0.06).")
@@ -67,7 +67,7 @@ def run(
     rankingPrincetonAllTrialsByEarnings = np.zeros(trials)
     # Our ranking at the end of each trial (50 day competition) by Sharpe Ratio
     rankingPrincetonAllTrialsBySharpe = np.zeros(trials)
-    #Our total assets under management at the end of each trial
+    # Our total assets under management at the end of each trial
     earningsPrincetonAllTrials = np.zeros(trials)
     # Our final sharpe ratio at the end of each trial
     sharpePrincetonAllTrials = np.zeros(trials)
@@ -114,16 +114,24 @@ def run(
                         # save team's daily returns for Sharpe Ratio
                         teamReturns_SharpeGame[team, day] = returns
 
-                # all other teams choose a random portfolio returns distribution on their turn
+                # all other teams choose a portfolio returns distribution on their turn (determined by given opponent_strategy, default is "random")
                 else:
 
                     if opponent_strategy == "random":
-                        # choose random vol value (by taking value from random index of vol array)
                         tempVol = vol[np.random.randint(0, len(vol))]
                     elif opponent_strategy == "low":
                         tempVol = minVol
                     elif opponent_strategy == "high":
                         tempVol = maxVol
+                    elif opponent_strategy == "mixed":
+                        if (team <= (num_teams/3)):
+                            tempVol = np.mean(vol)
+                        elif (team <= 2*(num_teams/3)):
+                            tempVol = maxVol
+                        else:
+                            tempVol = vol[np.random.randint(0, len(vol))]
+                    elif opponent_strategy == "avg":
+                        tempVol = np.mean(vol)
                     else:
                         raise Exception("Please choose a valid opponent strategy")
                     # pick a percent return from distribution with tempVol and mean mu
