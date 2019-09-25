@@ -18,7 +18,7 @@ When dealing with actual dollars, a rational person’s utility curve is increas
 
 However, in the case of the competition, finishing 3rd is effectively equivalent to finishing last in terms of realized utility, regardless of paper returns (neither gets to go to NYC).
 
-In such a case, where there is a kink in the utility curve (0U for places 61 to 3, 1U for places 1 and 2), the optimal strategy, aside from obviously maximizing edge, is to maximize variance so long as one is not in the top 2 positions.
+In such a case, where there is a kink in the utility curve (0U for places 61 to 3, 1U for places 1 and 2), the optimal strategy, aside from obviously maximizing edge, is to maximize variance so long as one is not in the money.
 
 ## Our Strategy
 
