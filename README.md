@@ -26,11 +26,11 @@ We took the view that markets are relatively efficient, at least from the point 
 
 Further, trades we entered through the competition portal were executed with a 15 minute delay, so ideas we had to market-make wide markets or exploit latency in the competition portal were off the table.
 
-Given that, our strategy was to maximize our variance whenever we weren’t top 2, and hold cash so long as we were top 2.
+Given that, our strategy was to maximize our variance whenever we weren’t top 2, and hold cash so long as we were in the money.
 
 Because we could only take long positions in stock (no options allowed), the way we would maximize variance would be to invest the maximum possible in a few stocks with the highest variance.
 
-When seeking to maximize variance, we chose which stocks to “invest” in on any given day by evaluating which stocks with earnings on the close had the highest Implied Volatility based on their nearest-dated options. So long as we were top 2, we would hold cash.
+When seeking to maximize variance, we chose which stocks to “invest” in on any given day by evaluating which stocks with earnings on the close had the highest Implied Volatility based on their nearest-dated options. So long as we were in the money, we would hold cash.
 
 To confirm our intuition, we ran some simulations, that supported the idea.
 
