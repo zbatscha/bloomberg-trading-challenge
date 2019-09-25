@@ -1,13 +1,50 @@
 # Bloomberg Trading Challenge 2019
-## Simulation script and supporting figures of our strategy.
 
-Princeton University Team Members: Ziv Batscha, Joshua Eastman, Warren James, Allan Shen, Cindy Song
+### Team Members
+Ziv Batscha, Joshua Eastman, Warren James, Allan Shen, Cindy Song
 
-In Spring 2019, I led a team of 5 Freshmen in the Bloomberg Trading Challenge. The goal of the challenge was to devise a strategy for investing a million dollars of fake money, and execute that strategy on the Bloomberg Terminal over the course of 10 weeks. When developing our strategy, it was important to note the following: team rankings (total P&L) were public and immediate; there was no edge in picking stocks or in execution of trades; and only the top two teams (with the greatest returns) from each index would be invited to the Finals in NY. Effectively, all teams were investing in a random variable with the same mean but different distributions. In this case, we predicted that the optimal strategy was to maximize variance, while not in first or second place, and minimize variance so long as we were guaranteed to be finalists.
- 
-Our team strategy at the beginning was to bet on the earnings release reports of the highest implied volatility companies; we bought 200K worth of equity in each of the top five most volatile companies every day, immediately before they released an earnings report, and then sold each position within 24 hours. This strategy earned us ~180k (roughly 18% profit) in the first week. 
- 
-The Monte Carlo script provided in the repo simulates 1000 trials of 50 day Bloomberg Trading competitions, allowing each team to randomly choose from return distributions resembling those normally found in the market, with the Princeton team taking on maximum variance (100% annual implied vol). The simulation, which supported our intuition and allowed us to better design our strategy, proves that our high vol strategy of betting on binary earnings releases (and holding cash while in the lead) is indeed the most optimal one given the challenge guidelines, both in terms of total assets under management at the end of the competition and in terms of maximizing our Sharpe ratio. In the particular script we have provided, we have a 10.8% chance on average of making the finals (3.42 Edge) when considering ranking by total assets, and a 9.4% chance of winning (2.96 Edge) by Sharpe Ratio. Although we had the highest returns among all 61 competing teams in our index (Russel 3000), we were not allowed to attend the Finals (no reason was provided to us).
+## Rules
+
+- Teams are given $1M notional to paper trade products in the Russell 3000 Index (long positions only)
+- Teams could invest a max of $200K per position
+- The 2 teams with the top returns are invited to NYC for finals (out of 61 in our division)
+- The competition lasted 10-weeks
+
+## Key Ideas
+
+The rules of the competition did not make it a realistic simulation of actual trading for the following reason:
+
+When dealing with actual dollars, a rational person’s utility curve is increasing at a decreasing rate (e.g. sqrt(x) or log(x)). Hence one would need additional edge to justify taking on additional risk.
+
+However, in the case of the competition, finishing 3rd is effectively equivalent to finishing last in terms of realized utility, regardless of paper returns (neither gets to go to NYC).
+
+In such a case, where there is a kink in the utility curve (0U for places 61 to 3, 1U for places 1 and 2), the optimal strategy, aside from obviously maximizing edge, is to maximize variance so long as one is not in the top 2 positions.
+
+## Our Strategy
+
+We took the view that markets are relatively efficient, at least from the point of view of Freshmen, and that we would not find mispricings in the actual stock market.
+
+Further, trades we entered through the competition portal were executed with a 15 minute delay, so ideas we had to market-make wide markets or exploit latency in the competition portal were off the table.
+
+Given that, our strategy was to maximize our variance whenever we weren’t top 2, and hold cash so long as we were top 2.
+
+Because we could only take long positions in stock (no options allowed), the way we would maximize variance would be to invest the maximum possible in a few stocks with the highest variance.
+
+When seeking to maximize variance, we chose which stocks to “invest” in on any given day by evaluating which stocks with earnings on the close had the highest Implied Volatility based on their nearest-dated options. So long as we were top 2, we would hold cash.
+
+To confirm our intuition, we ran some simulations, that supported the idea.
+
+We found that the above strategy gave us above a 50% chance of winning (assuming that other teams were seeking to minimize risk), and that when other teams were maximizing risk, this strategy was still optimal.
+
+## The Results
+
+We were lucky to end up on the right side of the distribution, as our first week of “gambols” paid off (+18%)
+
+We then switched to cash for the remaining 9-weeks of the competition, and no one caught up to us.
+
+Sadly, the judges decided that what we were doing was not investing. And we agree! And we were not invited to the finals.
+
+## To Run Code
 
 Some packages may require prior installation through pip, namely: 
 ```
